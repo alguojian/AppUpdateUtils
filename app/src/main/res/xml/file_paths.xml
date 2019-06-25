@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<paths>
+
+    <!--app目录-->
+    <external-path
+        name="files_root"
+        path="Android/data/com.alguojian.appupdate/" />
+
+    <!--sd卡根目录-->
+    <external-path
+        name="external_storage_root"
+        path="." />
+</paths>
