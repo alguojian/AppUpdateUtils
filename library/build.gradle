@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -37,9 +37,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    api 'com.liulishuo.okdownload:okdownload:1.0.5'
-    api 'com.liulishuo.okdownload:okhttp:1.0.5'
-    api 'com.liulishuo.okdownload:sqlite:1.0.5'
+    implementation 'com.liulishuo.okdownload:okdownload:1.0.5'
+    implementation 'com.liulishuo.okdownload:okhttp:1.0.5'
+    implementation 'com.liulishuo.okdownload:sqlite:1.0.5'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.squareup.okhttp3:okhttp:3.14.2'
 }

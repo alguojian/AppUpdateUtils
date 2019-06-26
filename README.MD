@@ -1,7 +1,6 @@
-# android app 更新下载安装，通知栏提示下载进度
+## android app 更新下载安装，通知栏提示下载进度
 
-[![](https://jitpack.io/v/ALguojian/AppUpdate.svg)](https://jitpack.io/#ALguojian/AppUpdate)
-
+[![](https://www.jitpack.io/v/ALguojian/AppUpdate.svg)](https://www.jitpack.io/#ALguojian/AppUpdate)
 #### 1. Add it in your root build.gradle at the end of repositories:
 
 ```
