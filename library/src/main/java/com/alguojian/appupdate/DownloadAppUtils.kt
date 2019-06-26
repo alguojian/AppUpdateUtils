@@ -31,7 +31,7 @@ object DownloadAppUtils {
         filePath = context.externalCacheDir.absolutePath + File.separator + name + ".apk"
         Downloader.downloadImage(context, url, "$name.apk", object : DownloadListener1() {
             override fun taskStart(task: DownloadTask, model: Listener1Assist.Listener1Model) {
-                Toast.makeText(context, "正在下载，请稍后...", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "开始下载，请稍后...", Toast.LENGTH_LONG).show()
             }
 
             override fun taskEnd(
@@ -43,10 +43,10 @@ object DownloadAppUtils {
                 if (null == realCause) {
                     send(context, 100, name)
                 } else {
-                    Toast.makeText(context, "网络出错了，请稍后再试", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "网络出错了，下载已暂停", Toast.LENGTH_LONG).show()
                 }
                 isDownLoading=false
-                enforceUpdateProgressDialog?.setEnd(realCause)
+                enforceUpdateProgressDialog?.setEnd()
             }
 
             override fun progress(task: DownloadTask, currentOffset: Long, totalLength: Long) {

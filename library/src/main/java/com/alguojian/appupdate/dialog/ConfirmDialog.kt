@@ -72,11 +72,8 @@ class ConfirmDialog(
         }
     }
 
-    fun setEnd(exception: Exception?) {
+    fun setEnd() {
         isDownLoading = false
-        if (null == exception) {
-            dismiss()
-        }
     }
 
     private fun setCustomDialog() {
@@ -92,7 +89,7 @@ class ConfirmDialog(
         versionName!!.text = "版本号：$serverVersionName"
         sureBtn!!.setOnClickListener {
             if (!isNewWorkContact) {
-                Toast.makeText(mContext, "网络连接失败，请检查后再试", Toast.LENGTH_LONG).show()
+                Toast.makeText(mContext, "网络连接失败，请检查后重试", Toast.LENGTH_LONG).show()
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !mContext.packageManager.canRequestPackageInstalls()) {
                 InstallUnknowSourceDialog(mContext).show()
             } else {
