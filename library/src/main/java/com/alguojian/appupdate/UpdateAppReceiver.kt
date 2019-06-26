@@ -18,12 +18,12 @@ import java.io.File
  * @date on 2017/11/3.
  */
 
-class UpdateAppReceiver(context: Context) : BroadcastReceiver() {
+class UpdateAppReceiver(var context: Context) : BroadcastReceiver() {
 
     val intentFilter: IntentFilter
         get() {
             val intentFilter = IntentFilter()
-            intentFilter.addAction("com.alguojian.appupdate")
+            intentFilter.addAction(context.packageName)
             return intentFilter
         }
 

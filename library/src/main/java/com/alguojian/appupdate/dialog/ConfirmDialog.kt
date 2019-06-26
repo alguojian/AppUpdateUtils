@@ -36,7 +36,7 @@ class ConfirmDialog(
     private var cancelBtn: TextView? = null
     private var versionName: TextView? = null
     private var view: View? = null
-    private var isDownLoading = false
+    var isDownLoading = false
 
     /**
      * 检测是否有网络

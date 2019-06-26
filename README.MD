@@ -63,6 +63,9 @@
 #### 4. 使用方式如下,强制更新已经实现，使用只需要设置是否开启，下载进度也做了回调，下载完成会自动打开安装页面，下载出错也会直接回调进度下载进度100%，请自行处理
 
 ```
+    //下载使用了okdownload，有时会下载失败，所以需要在application添加okhttp配置，如果已经使用切勿重复配置
+    AppUpdate.initThis(this)
+
     //动态注册广播，用于接收下载进度，以及通知栏
     updateAppReceiver = UpdateAppReceiver(this)
     registerReceiver(updateAppReceiver, updateAppReceiver.intentFilter)

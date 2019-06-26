@@ -63,7 +63,7 @@ object DownloadAppUtils {
     }
 
     private fun send(context: Context, progress: Int, name: String) {
-        val intent = Intent("com.alguojian.appupdate")
+        val intent = Intent(context.packageName)
         intent.putExtra("progress", progress)
         intent.putExtra("title", name)
         context.sendBroadcast(intent)

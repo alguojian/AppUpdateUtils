@@ -150,6 +150,10 @@ object AppUpdate {
      * 开始更新
      */
     fun startUpdate() {
+        if (null != confirmDialog && confirmDialog!!.isDownLoading) {
+            return
+        }
+
         var content = ""
         if (!TextUtils.isEmpty(updateInfo)) {
             content = updateInfo
