@@ -31,8 +31,8 @@
             <shape>
                 <corners android:radius="10dip" />
                 <gradient
-                    android:startColor="@color/theme_color"
-                    android:centerColor="@color/theme_color"
+                    android:startColor="@color/COLOR_999999"
+                    android:centerColor="@color/COLOR_999999"
                     android:centerY="1"
                     android:endColor="#f2f4f8" />
             </shape>

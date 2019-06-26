@@ -19,6 +19,7 @@ import java.io.File
 object DownloadAppUtils {
 
     var filePath: String? = null
+    var isDownLoading=false
 
     fun download(
         context: Context,
@@ -44,10 +45,12 @@ object DownloadAppUtils {
                 } else {
                     Toast.makeText(context, "网络出错了，请稍后再试", Toast.LENGTH_LONG).show()
                 }
+                isDownLoading=false
                 enforceUpdateProgressDialog?.setEnd(realCause)
             }
 
             override fun progress(task: DownloadTask, currentOffset: Long, totalLength: Long) {
+                isDownLoading=true
                 enforceUpdateProgressDialog?.setProgress((currentOffset * 100L / totalLength).toInt())
                 updateProgressCallBack?.downloadProgress((currentOffset / totalLength * 100L).toInt())
                 send(context, (currentOffset * 100L / totalLength).toInt(), name)

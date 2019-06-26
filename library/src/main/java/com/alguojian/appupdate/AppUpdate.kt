@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.text.TextUtils
+import android.widget.Toast
 import com.alguojian.appupdate.CallBack.ClickCallback
 import com.alguojian.appupdate.CallBack.UpdateProgressCallBack
 import com.alguojian.appupdate.dialog.ConfirmDialog
@@ -150,7 +151,8 @@ object AppUpdate {
      * 开始更新
      */
     fun startUpdate() {
-        if (null != confirmDialog && confirmDialog!!.isDownLoading) {
+        if (DownloadAppUtils.isDownLoading) {
+            Toast.makeText(activity, "新版本正在下载中...", Toast.LENGTH_LONG).show()
             return
         }
 
