@@ -8,8 +8,6 @@ import android.view.View
 import android.widget.Toast
 import com.alguojian.appupdate.CallBack.ClickCallback
 import com.alguojian.appupdate.CallBack.UpdateProgressCallBack
-import com.appupdate.alguojian.appupdate.AppUpdate
-import com.appupdate.alguojian.appupdate.UpdateAppReceiver
 
 
 import java.io.File
@@ -21,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         updateAppReceiver = UpdateAppReceiver(this)
-        registerReceiver(updateAppReceiver, updateAppReceiver!!.intentFilter)
+        registerReceiver(updateAppReceiver, updateAppReceiver.intentFilter)
 
         ActivityCompat.requestPermissions(
             this,
@@ -61,13 +59,9 @@ class MainActivity : AppCompatActivity() {
             .setUpdateInfo(getString(R.string.app_update_message))
             //设置是否强制更新
             .setEnforceUpdate(boolean)
-            //设置更新是的回调
-            .setOnUpdateClick(object : ClickCallback {
-                override fun cancel() {
-                }
+            //设置更新弹框回调
+            .setOnUpdateClick(ClickCallback {
 
-                override fun success() {
-                }
             })
             .setDownProgressListener(UpdateProgressCallBack {
 

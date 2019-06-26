@@ -1,4 +1,4 @@
-package com.appupdate.alguojian.appupdate
+package com.alguojian.appupdate
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -6,7 +6,6 @@ import android.content.Context
 import android.text.TextUtils
 import com.alguojian.appupdate.CallBack.ClickCallback
 import com.alguojian.appupdate.CallBack.UpdateProgressCallBack
-import com.alguojian.appupdate.R
 import com.alguojian.appupdate.dialog.ConfirmDialog
 
 import com.liulishuo.okdownload.OkDownload
@@ -71,7 +70,7 @@ object AppUpdate {
      * 设置强制更新，默认为否
      */
     fun setEnforceUpdate(flag: Boolean): AppUpdate {
-        this.enforceUpdate = flag
+        enforceUpdate = flag
         return this
     }
 
@@ -80,13 +79,13 @@ object AppUpdate {
      */
     fun initThis(context: Context) {
         val builder = OkDownload.Builder(context)
-                .connectionFactory { url ->
-                    val factory = DownloadOkHttp3Connection.Factory()
-                    val builder1 = factory.builder()
-                    builder1.readTimeout(100, TimeUnit.SECONDS)
-                    factory.setBuilder(builder1)
-                    factory.create(url)
-                }
+            .connectionFactory { url ->
+                val factory = DownloadOkHttp3Connection.Factory()
+                val builder1 = factory.builder()
+                builder1.readTimeout(100, TimeUnit.SECONDS)
+                factory.setBuilder(builder1)
+                factory.create(url)
+            }
         OkDownload.setSingletonInstance(builder.build())
     }
 
@@ -94,7 +93,7 @@ object AppUpdate {
      * 初始化
      */
     fun with(activity: Activity): AppUpdate {
-        this.activity = activity
+        AppUpdate.activity = activity
         return this
     }
 
@@ -102,7 +101,7 @@ object AppUpdate {
      * 设置更新时的下载地址
      */
     fun setUpdatePath(apkPath: String): AppUpdate {
-        this.apkPath = apkPath
+        AppUpdate.apkPath = apkPath
         return this
     }
 
@@ -110,7 +109,7 @@ object AppUpdate {
      * 设置更新时点击取消或者确定的回调
      */
     fun setOnUpdateClick(clickCallback1: ClickCallback): AppUpdate {
-        this.clickCallback = clickCallback1
+        clickCallback = clickCallback1
         return this
     }
 
@@ -118,7 +117,7 @@ object AppUpdate {
      * 下载进度的回调
      */
     fun setDownProgressListener(updateProgressCallBack: UpdateProgressCallBack): AppUpdate {
-        this.updateProgressCallBack = updateProgressCallBack
+        AppUpdate.updateProgressCallBack = updateProgressCallBack
         return this
     }
 
@@ -126,7 +125,7 @@ object AppUpdate {
      * 设置更新时的下载内容
      */
     fun setUpdateInfo(updateInfo: String): AppUpdate {
-        this.updateInfo = updateInfo
+        AppUpdate.updateInfo = updateInfo
         return this
     }
 
@@ -134,7 +133,7 @@ object AppUpdate {
      * 设置更新时的版本号
      */
     fun setVersionName(serverVersionName: String): AppUpdate {
-        this.serverVersionName = serverVersionName
+        AppUpdate.serverVersionName = serverVersionName
         return this
     }
 
@@ -142,8 +141,8 @@ object AppUpdate {
      * 设置通知栏更新时的图标，默认使用android机器人图标
      */
     fun setNotificationIconAndName(icon: Int, name: String): AppUpdate {
-        this.notificationIcon = icon
-        this.notificationName = name
+        notificationIcon = icon
+        notificationName = name
         return this
     }
 
@@ -155,20 +154,22 @@ object AppUpdate {
         if (!TextUtils.isEmpty(updateInfo)) {
             content = updateInfo
         }
-        confirmDialog = ConfirmDialog(activity, serverVersionName, content, enforceUpdate, object : ClickCallback {
-            override fun cancel() {
+        confirmDialog = ConfirmDialog(
+            activity, serverVersionName, content, enforceUpdate,
+            ClickCallback { result ->
                 if (null != clickCallback) {
-                    clickCallback!!.cancel()
+                    clickCallback!!.result(result)
                 }
-            }
-
-            override fun success() {
-                if (null != clickCallback) {
-                    clickCallback!!.success()
+                if (result) {
+                    DownloadAppUtils.download(
+                        activity,
+                        apkPath,
+                        notificationName + "_" + serverVersionName,
+                        updateProgressCallBack,
+                        if (enforceUpdate) confirmDialog else null
+                    )
                 }
-                DownloadAppUtils.download(activity, apkPath, notificationName + "_" + serverVersionName, updateProgressCallBack, if (enforceUpdate) confirmDialog else null)
-            }
-        })
+            })
         confirmDialog!!.show()
     }
 }

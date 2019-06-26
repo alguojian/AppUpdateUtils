@@ -1,4 +1,4 @@
-package com.appupdate.alguojian.appupdate.dialog
+package com.alguojian.appupdate.dialog
 
 import android.app.Dialog
 import android.content.Context

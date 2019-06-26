@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.alguojian.appupdate.CallBack.ClickCallback
 import com.alguojian.appupdate.R
-import com.appupdate.alguojian.appupdate.dialog.InstallUnknowSourceDialog
 
 
 /**
@@ -102,12 +101,12 @@ class ConfirmDialog(
                 } else if (isDownLoading) {
                     return@setOnClickListener
                 }
-                clickCallback.success()
+                clickCallback.result(true)
             }
         }
         cancelBtn!!.setOnClickListener {
             dismiss()
-            clickCallback.cancel()
+            clickCallback.result(false)
         }
     }
 }

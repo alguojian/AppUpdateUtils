@@ -2,22 +2,19 @@
 
 [![](https://jitpack.io/v/ALguojian/AppUpdate.svg)](https://jitpack.io/#ALguojian/AppUpdate)
 
-- Add it in your root build.gradle at the end of repositories:
+#### 1. Add it in your root build.gradle at the end of repositories:
 
 ```
     allprojects {
 
         repositories {
-
             maven { url 'https://www.jitpack.io' }
-
         }
     }
 
 ```
 
-
- - Add the dependency
+#### 2.Add the dependency
 
 
 ```
@@ -28,7 +25,7 @@
     }
 ```
 
-4.因为使用了广播和适配7.0，所以清单文件需要配置如下
+#### 3.因为使用了广播和适配7.0，所以清单文件需要配置如下
 
 ```
 <provider
@@ -64,105 +61,50 @@
 </paths>
 ```
 
-5. 使用方式如下,强制更新已经实现，使用只需要设置是否开启，下载进度也做了回调，下载完成会自动打开安装页面，下载出错也会直接回调进度下载进度100%，请自行处理
+#### 4. 使用方式如下,强制更新已经实现，使用只需要设置是否开启，下载进度也做了回调，下载完成会自动打开安装页面，下载出错也会直接回调进度下载进度100%，请自行处理
 
 ```
+    //动态注册广播，用于接收下载进度，以及通知栏
+    updateAppReceiver = UpdateAppReceiver(this)
+    registerReceiver(updateAppReceiver, updateAppReceiver.intentFilter)
 
-  public class MainActivity extends AppCompatActivity {
+  
+    //更新
+    
+    AppUpdate.with(this@MainActivity)
+            
+            //设置下载地址，不支持中文
+            .setUpdatePath("https://ossqiyu.oss-cn-hangzhou.aliyuncs.com/Versions/yuebeikafei137.apk")
+            
+            //设置通知栏通知的图标
+            .setNotificationIconAndName(R.mipmap.ic_launcher, "约杯咖啡")
+            
+            //设置版本名字
+            .setVersionName("1.4.0")
+            
+            //设置版本更新内容
+            .setUpdateInfo(getString(R.string.app_update_message))
+            
+            //设置是否强制更新
+            .setEnforceUpdate(boolean)
+            
+            //设置更新弹框回调
+            .setOnUpdateClick(ClickCallback {
 
+            })
+            
+            //设置下载进度回调
+            .setDownProgressListener(UpdateProgressCallBack {
 
-      private UpdateAppReceiver updateAppReceiver;
-
-      @Override
-      protected void onCreate(Bundle savedInstanceState) {
-          super.onCreate(savedInstanceState);
-
-          setContentView(R.layout.activity_main);
-
-          updateAppReceiver = new UpdateAppReceiver();
-
-          IntentFilter intentFilter = new IntentFilter();
-
-          //你的包名
-          intentFilter.addAction("com.alguojian.appupdate");
-
-          registerReceiver(updateAppReceiver, intentFilter);
-
-          updateAppReceiver.setNotification(this);
-
-          ActivityCompat.requestPermissions(this,
-                  new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_NOTIFICATION_POLICY
-                          , Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE}, 200);
-
-          findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-
-                  AppUpdate.into(MainActivity.this)
-
-                          //设置下载地址，不支持中文
-                          .setUpdatePath("http://issuecdn.baidupcs.com/issue/netdisk/apk/BaiduNetdisk_7.15.1.apk")
-
-                          //设置通知栏通知的图标
-                          .setNotificationIcon(R.mipmap.ic_launcher)
-
-                          //设置版本名字
-                          .setVersionName("1.3.0")
-
-                          //设置版本更新内容
-                          .setUpdateInfo("我们更我们更新了我们更新了我们更新了我们更新了新了")
-
-                          //设置是否强制更新
-                          .setEnforceUpdate(true)
-
-                          //设置更新是的回调
-                          .setOnUpdateClick(new UpDateCallback() {
-                              @Override
-                              public void cancel() {
-
-                                  System.out.println("--------------点击取消更新");
-                              }
-
-                              @Override
-                              public void success() {
-                                  System.out.println("--------------点击开始更新");
-                              }
-
-                          })
-                          .setOnUpdateNoWifiClick(new ClickCallback() {
-                              @Override
-                              public void cancel() {
-
-                                  System.out.println("--------------不是wifi，取消更新");
-                              }
-
-                              @Override
-                              public void success() {
-
-                                  System.out.println("--------------点击开始更新");
-                              }
-                          })
-                          .setDownProgressListener(new UpdateProgressCallBack() {
-                              @Override
-                              public void downloadProgress(int progress) {
-
-                                  if (100 == progress) {
-
-                                      updateAppReceiver.startInstall(MainActivity.this);
-
-                                  }
-                              }
-                          }).startUpdate();
-              }
-          });
-      }
+            })
+            .startUpdate()
+    
 
       @Override
       protected void onDestroy() {
-          unregisterReceiver(updateAppReceiver);
-          updateAppReceiver=null;
           super.onDestroy();
-
+          //解除绑定
+          unregisterReceiver(updateAppReceiver);
       }
   }
 

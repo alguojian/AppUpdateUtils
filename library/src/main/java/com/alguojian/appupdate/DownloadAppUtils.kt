@@ -1,4 +1,4 @@
-package com.appupdate.alguojian.appupdate
+package com.alguojian.appupdate
 
 import android.content.Context
 import android.content.Intent

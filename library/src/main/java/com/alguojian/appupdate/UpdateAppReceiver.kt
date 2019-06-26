@@ -1,4 +1,4 @@
-package com.appupdate.alguojian.appupdate
+package com.alguojian.appupdate
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -93,7 +93,7 @@ class UpdateAppReceiver(context: Context) : BroadcastReceiver() {
     }
 
     companion object {
-        private val ONE_HUNDRED = 100
+        private const val ONE_HUNDRED = 100
         private var nm: NotificationManager? = null
     }
 }
