@@ -19,7 +19,7 @@
 ```
     dependencies {
 
-        implementation 'com.github.ALguojian:AppUpdate:1.0.0'
+        implementation 'com.github.alguojian:AppUpdate:1.0.5'
 
     }
 ```
@@ -89,6 +89,9 @@
             
             //设置是否强制更新
             .setEnforceUpdate(boolean)
+            
+            //设置是否支持断点续传下载，默认不支持
+            .setBreakpointDown(false)
             
             //设置更新弹框回调
             .setOnUpdateClick(ClickCallback {
