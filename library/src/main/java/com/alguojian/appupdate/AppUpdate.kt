@@ -37,7 +37,7 @@ object AppUpdate {
     /**
      * 版本名字
      */
-    var serverVersionName = ""
+    private var serverVersionName = ""
     private var notificationName = ""
 
     /**
@@ -60,6 +60,12 @@ object AppUpdate {
      */
     private var enforceUpdate = false
 
+
+    /**
+     * 是否使用断点续传下载
+     */
+    private var breakpointDown = false
+
     /**
      * 默认更新详情
      */
@@ -72,6 +78,15 @@ object AppUpdate {
      */
     fun setEnforceUpdate(flag: Boolean): AppUpdate {
         enforceUpdate = flag
+        return this
+    }
+
+
+    /**
+     * 设置是否使用断点续传下载,默认关闭
+     */
+    fun setBreakpointDown(flag: Boolean): AppUpdate {
+        breakpointDown = flag
         return this
     }
 
@@ -170,7 +185,7 @@ object AppUpdate {
                     DownloadAppUtils.download(
                         activity,
                         apkPath,
-                        notificationName + "_" + serverVersionName,
+                        "${notificationName}_${if (!breakpointDown) serverVersionName + "_" + System.currentTimeMillis().toString() else serverVersionName}",
                         updateProgressCallBack,
                         if (enforceUpdate) confirmDialog else null
                     )

@@ -5,7 +5,7 @@
     <!--app目录-->
     <external-path
         name="files_root"
-        path="Android/data/com.alguojian.appupdate/" />
+        path="Android/data/com.alguojian.example/" />
 
     <!--sd卡根目录-->
     <external-path
