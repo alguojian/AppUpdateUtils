@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
             //设置更新弹框回调
             .setOnUpdateClick(ClickCallback {
-
+                Toast.makeText(this,"哈哈哈哈哈",Toast.LENGTH_LONG).show()
             })
             .setDownProgressListener(UpdateProgressCallBack {
 

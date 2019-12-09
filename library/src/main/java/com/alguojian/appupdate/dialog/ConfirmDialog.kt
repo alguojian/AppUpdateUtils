@@ -18,7 +18,7 @@ import com.alguojian.appupdate.R
 /**
  * 更新弹框
  *
- * @author ALguojain
+ * @author alguojian
  * @date on 2017/10/13.
  */
 class ConfirmDialog(

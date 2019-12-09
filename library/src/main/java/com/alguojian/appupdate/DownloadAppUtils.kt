@@ -31,6 +31,8 @@ object DownloadAppUtils {
         filePath = context.externalCacheDir.absolutePath + File.separator + name + ".apk"
         Downloader.downloadImage(context, url, "$name.apk", object : DownloadListener1() {
             override fun taskStart(task: DownloadTask, model: Listener1Assist.Listener1Model) {
+                isDownLoading=true
+                enforceUpdateProgressDialog?.isDownLoading=true
                 Toast.makeText(context, "开始下载，请稍后...", Toast.LENGTH_LONG).show()
             }
 
@@ -51,6 +53,7 @@ object DownloadAppUtils {
 
             override fun progress(task: DownloadTask, currentOffset: Long, totalLength: Long) {
                 isDownLoading=true
+                enforceUpdateProgressDialog?.isDownLoading=true
                 enforceUpdateProgressDialog?.setProgress((currentOffset * 100L / totalLength).toInt())
                 updateProgressCallBack?.downloadProgress((currentOffset / totalLength * 100L).toInt())
                 send(context, (currentOffset * 100L / totalLength).toInt(), name)
