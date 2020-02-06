@@ -18,7 +18,6 @@ class InstallUnknowSourceDialog(context: Context) : Dialog(context, R.style.Cust
     init {
         setContentView(R.layout.update_dialog_install_unknow_source)
         setCanceledOnTouchOutside(false)
-        findViewById<TextView>(R.id.cancel).setOnClickListener { dismiss() }
         findViewById<TextView>(R.id.confirm).setOnClickListener {
             val uri = Uri.fromParts("package", context.packageName, null)
             context.startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, uri))

@@ -60,7 +60,10 @@ class MainActivity : AppCompatActivity() {
             .setNotificationIconAndName(R.mipmap.ic_launcher, "约杯咖啡")
 
             //设置版本名字
-            .setVersionName("1.4.0")
+            .setVersionName("1.3.4.1")
+
+            //设置版本更新标题
+            .setUpdateTitle("发现新版本")
 
             //设置版本更新内容
             .setUpdateInfo(getString(R.string.app_update_message))
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
             //设置更新弹框回调
             .setOnUpdateClick(ClickCallback {
-                Toast.makeText(this,"哈哈哈哈哈",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, if (it) "开始更新" else "取消更新", Toast.LENGTH_LONG).show()
             })
             .setDownProgressListener(UpdateProgressCallBack {
 

@@ -19,7 +19,7 @@
 ```
     dependencies {
 
-        implementation 'com.github.alguojian:AppUpdate:1.0.5'
+        implementation 'com.github.alguojian:AppUpdate:1.0.7'
 
     }
 ```
@@ -82,11 +82,14 @@
             .setNotificationIconAndName(R.mipmap.ic_launcher, "约杯咖啡")
             
             //设置版本名字
-            .setVersionName("1.4.0")
+            .setVersionName("1.3.4.1")
+
+            //设置版本更新标题
+            .setUpdateTitle("发现新版本")
             
             //设置版本更新内容
             .setUpdateInfo(getString(R.string.app_update_message))
-            
+
             //设置是否强制更新
             .setEnforceUpdate(boolean)
             

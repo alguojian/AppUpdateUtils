@@ -70,6 +70,7 @@ object AppUpdate {
      * 默认更新详情
      */
     private var updateInfo = "1、修复了一些已知bug"
+    private var updateTitle = "发现新版本"
 
     private var confirmDialog: ConfirmDialog? = null
 
@@ -146,6 +147,14 @@ object AppUpdate {
     }
 
     /**
+     * 设置更新时的下载标题
+     */
+    fun setUpdateTitle(updateTitle: String): AppUpdate {
+        AppUpdate.updateTitle = updateTitle
+        return this
+    }
+
+    /**
      * 设置更新时的版本号
      */
     fun setVersionName(serverVersionName: String): AppUpdate {
@@ -176,7 +185,7 @@ object AppUpdate {
             content = updateInfo
         }
         confirmDialog = ConfirmDialog(
-            activity, serverVersionName, content, enforceUpdate,
+            activity, serverVersionName, updateTitle, content, enforceUpdate,
             ClickCallback { result ->
                 if (null != clickCallback) {
                     clickCallback!!.result(result)

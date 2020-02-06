@@ -5,6 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="text_blue">#0076FF</color>
     <color name="text_black">#333333</color>
-    <color name="theme_color">#d90c0c</color>
+    <color name="theme_color">#1cb7a9</color>
     <color name="COLOR_999999">#999999</color>
+    <color name="COLOR_494949">#494949</color>
+    <color name="COLOR_797979">#797979</color>
+    <color name="COLOR_ffffff">#ffffff</color>
 </resources>

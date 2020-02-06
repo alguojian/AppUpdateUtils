@@ -31,10 +31,10 @@
             <shape>
                 <corners android:radius="10dip" />
                 <gradient
-                    android:startColor="@color/COLOR_999999"
-                    android:centerColor="@color/COLOR_999999"
+                    android:startColor="@color/theme_color"
+                    android:centerColor="@color/theme_color"
                     android:centerY="1"
-                    android:endColor="#f2f4f8" />
+                    android:endColor="@color/theme_color" />
             </shape>
         </clip>
     </item>
